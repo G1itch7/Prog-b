@@ -10,6 +10,9 @@ Lav slowdown button
 Lav trail
 Find lyde
 add level indicator
+add timer
+start menu
+difficulty slider
 */
 
 function setup(){
