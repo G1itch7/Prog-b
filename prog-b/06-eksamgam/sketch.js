@@ -19,7 +19,8 @@ function setup(){
 //Laver en farve mappe for mig selv
   colors = {
     c1: color("#aad8ff"),
-    c2: color("#f0f0f0")
+    c2: color("#f0f0f0"),
+    c3: color("#80808080")
   }
 //Laver musen
   player = {
@@ -69,6 +70,6 @@ function createCircle(){
   x: random(20,windowWidth-20),
   y: random(20,windowHeight-20),
   w: 100,
-  
+
  }
 }
