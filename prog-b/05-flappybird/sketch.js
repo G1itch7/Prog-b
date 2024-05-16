@@ -32,7 +32,7 @@ function draw() {
   imageMode(CORNERS)
   image(BG, 0, 0, windowWidth, windowHeight)
   
-  for(i=0; i < walls.length; i++){
+  for(let i=0; i < walls.length; i++){
     walls[i].show()
     walls[i].move()
     walls[i].collide()    
