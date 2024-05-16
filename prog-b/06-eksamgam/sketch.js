@@ -6,10 +6,16 @@ let globalInterval
 let point = 0
 let level = 1
 let tryAgain
+let sound1
+let sound2
 /* to do list
 Lav slowdown button
-Find lyde
 */
+
+function preload(){
+  sound1 = new Audio('assets/pop.mp3')
+  sound2 = new Audio('assets/bloop.mp3')
+}
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
@@ -114,8 +120,9 @@ let growSpeed = 1
 let maxGrow = 100
 function createCircle(){
  let circle = {
-  x: random(100,windowWidth-100),
-  y: random(100,windowHeight-100),
+  //ramme for hvor de kan spawne
+  x: random(200,width-200),
+  y: random(200,height-200),
   dia: 1,
   max: false,
   show: function (){
@@ -205,6 +212,15 @@ function keyPressed(){
       if(within(theCirk)){
         circles.splice(i,1)
         point += 1
+        //restarter lyd så man kan spamme den
+        sound1.load()
+        //spiller min lyd
+        sound1.play() 
+      } else{
+        //restarter lyd så man kan spamme den
+        sound2.load()
+        //spiller min lyd
+        sound2.play()
       }
     }
   }
@@ -217,6 +233,16 @@ function mousePressed(){
     if(within(theCirk)){
       circles.splice(i,1)
       point += 1
+      //restarter lyd så man kan spamme den
+     sound1.load() 
+      //spiller min lyd
+     sound1.play()
+    } else {
+      //restarter lyd så man kan spamme den
+      sound2.load()
+       //spiller min lyd
+      sound2.play()
+      
     }
   }
 }
