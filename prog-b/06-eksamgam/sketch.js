@@ -3,7 +3,7 @@ let colors
 let circles = []
 let lives = 1
 let globalInterval
-let boom
+let point = 0
 /* to do list
 Lav slowdown button
 Find lyde
@@ -58,15 +58,14 @@ function draw(){
   player.y = mouseY
  
   for(let i=0; i < circles.length; i++){
-    //køre hver eneste cirkels funktioner
-    circles[i].show()
-    circles[i].big()
-
     //hvis en cirkel bliver for lille fjernes den
     if(circles[i].dia <0){
       circles.splice(i,1)
       lives -= 1
     }
+    //køre hver eneste cirkels funktioner
+    circles[i].show()
+    circles[i].big() 
   }
 
 
@@ -78,13 +77,15 @@ function draw(){
 }
 
 //interval ting
-let interval = 2000
+let interval = 900
 function intervalCreator(){
 //når 15 sekunder er gået vil intervallet af createCircle forkortes 
- if(frameCount % 600==0){ 
+ if(frameCount % 1200==0){ 
   //fjerner oprindelige interval for at undgå overlap
   clearInterval(globalInterval)
-  interval -= interval/5
+  interval -= interval/10
+  maxGrow -= maxGrow/50
+  growSpeed += growSpeed/25
   globalInterval = setInterval(createCircle, interval)
  }
 }
