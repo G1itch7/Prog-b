@@ -1,11 +1,10 @@
 let player
 let colors
 let circles = []
-
+let lives = 1
 let globalInterval
 
 /* to do list
-Lav cirkler
 Lav slowdown button
 Lav trail
 Find lyde
@@ -17,13 +16,14 @@ difficulty slider
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
-//gør at kanterne af cirklerne ikke ser dumme ud.
-  strokeWeight(0.2)
+
 //Laver en farve mappe for mig selv
   colors = {
     c1: color("#aad8ff"),
     c2: color("#f0f0f0"),
-    c3: color("#80808080")
+    c3: color("#80808080"),
+    c4: color("#90909090"),
+    c5: color("#e0e0e0e0")
   }
 //Laver musen
   player = {
@@ -35,6 +35,9 @@ function setup(){
     d2: 22,
     //funktioner der laver cirklerne på musen
     show: function (){
+      //gør at kanterne af cirklerne ikke ser dumme ud.
+      stroke(0)
+      strokeWeight(0.2)
       fill(colors.c1)
       ellipse(this.x,this.y,this.d1)
     },
@@ -54,7 +57,19 @@ function draw(){
   //opdatere player cirklens position
   player.x = mouseX
   player.y = mouseY
-  //viser cirklerne
+
+  for(let i=0; i < circles.length; i++){
+    //hvis en cirkel bliver for lille fjernes den
+    if(circles[i].dia <0){
+    circles.splice(i,1)
+    lives -= 1
+  }
+    //køre hver eneste cirkels funktioner
+    circles[i].show()
+    circles[i].big()
+  }
+
+  //viser player
   player.show()
   player.showInner()
 }
@@ -62,17 +77,40 @@ function draw(){
 let interval = 2000
 //interval ting
 function intervalCreator(){
- if(frameCount % 1800==0){
+ if(frameCount % 1800==0){ 
   clearInterval(globalInterval)
-  globalInterval = setInterval(createCircle, interval/4)
+  interval -= interval/4
+  globalInterval = setInterval(createCircle, interval)
  }
 }
 
+let growSpeed = 1
+let maxGrow = 100
 function createCircle(){
  let circle = {
-  x: random(20,windowWidth-20),
-  y: random(20,windowHeight-20),
-  w: 100,
-
+  x: random(100,windowWidth-100),
+  y: random(100,windowHeight-100),
+  dia: 1,
+  max: false,
+  show: function (){
+    //laver cirklerne
+    stroke(colors.c5)
+    strokeWeight(5)
+    fill(colors.c4)
+    ellipse(this.x,this.y,this.dia)
+  },
+  big: function (){
+    if(!this.max){
+      //for cirklerne til at gro
+      this.dia += growSpeed
+      //hvis cirklen er større end maxGrow vil if statementet gå til else
+      if(this.dia > maxGrow){
+        this.max = true
+      }
+    } else {
+      this.dia -= growSpeed
+    }
+  }
  }
+ circles.push(circle)
 }
