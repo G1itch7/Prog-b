@@ -1,78 +1,78 @@
 let player
-//bullets er en liste over bullets :sunglasses:
-let bullets = []
+let colors
+let circles = []
 
+let globalInterval
 
-function setup() {
+/* to do list
+Lav cirkler
+Lav slowdown button
+Lav trail
+Find lyde
+add level indicator
+add timer
+start menu
+difficulty slider
+*/
+
+function setup(){
   createCanvas(windowWidth, windowHeight);
-  // JSON objekt "Player" oprettes
-  // w = width, h = height, s = speed
+//gør at kanterne af cirklerne ikke ser dumme ud.
+  strokeWeight(0.2)
+//Laver en farve mappe for mig selv
+  colors = {
+    c1: color("#aad8ff"),
+    c2: color("#f0f0f0"),
+    c3: color("#80808080")
+  }
+//Laver musen
   player = {
-    x:width/2,
-    y:height-40,
-    w:width/10,
-    h:height/15,
-    s:25,
-    show(){
-      rectMode(CENTER)
-      fill(0)
-      rect(this.x,this.y,this.w,this.h)
+    //position placeholder
+    x: 0,
+    y: 0,
+    //størrelsen på cirkler
+    d1: 30,
+    d2: 22,
+    //funktioner der laver cirklerne på musen
+    show: function (){
+      fill(colors.c1)
+      ellipse(this.x,this.y,this.d1)
     },
-    move(direction){
-      // Direction er endten -1 eller 1
-      // Dette rykker spilleren
-      this.x += direction * this.s
-      this.x = constrain(this.x, 0, width)
-    },
-    shoot: function(){
-      //createBullet returnerer et JSON kugle
-      let b= createBullet()
-      //bullets er arrayet med kugler
-      bullets.push(b)
+    showInner: function (){
+      fill(colors.c2)
+      ellipse(this.x,this.y,this.d2)
     }
   }
+
+  globalInterval = setInterval(createCircle, 1000)
 }
 
-function draw() {
-  background(220);
-
-  // Dette kalder move funktionen der rykker playeren
-  if(keyIsDown(LEFT_ARROW)){
-    player.move(-1)
-  }
-  else if(keyIsDown(RIGHT_ARROW)){
-    player.move(1)
-  }
-
+function draw(){
+  background(50)
+  //fjerner cursoren over player cirklen
+  noCursor()
+  //opdatere player cirklens position
+  player.x = mouseX
+  player.y = mouseY
+  //viser cirklerne
   player.show()
-  //løb alle kuglerne i bullets i gennem med et loop
-  //og kald show og move funktionen på hver kugle
-  for(let i=0; i < bullets.length; i++){
-    bullets[i].show()
-    bullets[i].move()
-  }
+  player.showInner()
 }
 
-function createBullet(){
-  //giver et objekt med en kugle tilbage
-  return{
-    x: player.x,
-    y: player.y,
-    d: 8,
-    s: 10,
-    show: function(){
-      fill('yellow')
-      ellipse(this.x, this.y,this.d)
-    },
-    move: function(){
-      this.y -=this.s
-    }
-  }
+let interval = 2000
+//interval ting
+function intervalCreator(){
+ if(frameCount % 1800==0){
+  clearInterval(globalInterval)
+  globalInterval = setInterval(createCircle, interval/4)
+ }
 }
 
-function keyPressed(){
-  if (key == 'z'|| key =='x'||key==' '){
-    //Vi kalder shoot funktionen inde i player objektet
-    player.shoot()
-  }
+function createCircle(){
+ let circle = {
+  x: random(20,windowWidth-20),
+  y: random(20,windowHeight-20),
+  w: 100,
+
+ }
 }
