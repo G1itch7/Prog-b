@@ -6,7 +6,6 @@ let globalInterval
 
 /* to do list
 Lav slowdown button
-Lav trail
 Find lyde
 add level indicator
 add timer
@@ -57,29 +56,45 @@ function draw(){
   //opdatere player cirklens position
   player.x = mouseX
   player.y = mouseY
-
+ 
   for(let i=0; i < circles.length; i++){
-    //hvis en cirkel bliver for lille fjernes den
-    if(circles[i].dia <0){
-    circles.splice(i,1)
-    lives -= 1
-  }
     //køre hver eneste cirkels funktioner
     circles[i].show()
     circles[i].big()
+
+    //hvis en cirkel bliver for lille fjernes den
+    if(circles[i].dia <0){
+      circles.splice(i,1)
+      lives -= 1
+    }
+
+    //hvis musen er over en cirkel og der trykkes vil cirklen fjernes
+    let theCirk = circles[i]
+    
+    if(keyPressed()){
+      if(within(theCirk)){
+        circles.splice(i,1)
+      }
+      keyPressed()
+    }
   }
+
 
   //viser player
   player.show()
   player.showInner()
+
+  intervalCreator()
 }
 
-let interval = 2000
 //interval ting
+let interval = 2000
 function intervalCreator(){
- if(frameCount % 1800==0){ 
+//når 15 sekunder er gået vil intervallet af createCircle forkortes 
+ if(frameCount % 600==0){ 
+  //fjerner oprindelige interval for at undgå overlap
   clearInterval(globalInterval)
-  interval -= interval/4
+  interval -= interval/5
   globalInterval = setInterval(createCircle, interval)
  }
 }
@@ -113,4 +128,42 @@ function createCircle(){
   }
  }
  circles.push(circle)
+}
+
+//tjekker om musen er over en cirkel
+function within(cirk){
+  let cLeft = cirk.x - cirk.dia / 2
+  let cRight = cirk.x + cirk.dia / 2
+  let cTop = cirk.y - cirk.dia / 2
+  let cBottom = cirk.y + cirk.dia / 2
+
+  let mouseLeft = player.x - player.d1 / 4
+  let mouseRight = player.x + player.d1 / 4
+  let mouseTop = player.y - player.d1 / 4
+  let mouseBottom = player.y + player.d1 / 4
+
+  //udelukkelses metode
+  let overlap = true
+  if(
+    //hvis bare en af de her ting er rigtige er der intet overlap
+    //Player er til venstre for cirkel
+    mouseRight < cLeft ||
+    //Player er under cirkel
+    mouseBottom < cTop ||
+    //Player er under cirkel
+    mouseTop > cBottom ||
+    //Player er til højre for cirkel
+    mouseLeft > cRight
+  ){
+     overlap = false 
+  }
+  //returner om der er overlap
+  return overlap
+}
+
+//tjekker om keyboard knapperne er kilkket
+function keyPressed(){
+  if(key == "z" || key == "x"){
+    return true
+  }
 }
