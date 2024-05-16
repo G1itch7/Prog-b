@@ -1,16 +1,14 @@
 let player
 let colors
 let circles = []
-let lives = 1
+let lives = 10
 let globalInterval
 let point = 0
+let level = 1
+let tryAgain
 /* to do list
 Lav slowdown button
 Find lyde
-add level indicator
-add timer
-start menu
-difficulty slider
 */
 
 function setup(){
@@ -67,25 +65,47 @@ function draw(){
     circles[i].show()
     circles[i].big() 
   }
-
-
   //viser player
   player.show()
   player.showInner()
 
   intervalCreator()
+
+  scoreBoard()
+
+  if(lives <= 0){
+    gameOver()
+  }
+}
+//Scoreboard så jeg nemmere kan lave UI'en
+function scoreBoard(){
+  textSize(32)
+  textAlign(LEFT)
+  fill('cornflowerblue')
+  text('Level: ' + level,20,40)
+  fill('tomato')
+  text('Points: ' + point,20,80)
+  fill('limegreen')
+  text('Lives: ' + lives,20,120)
+  if(level == 1){
+    textSize(40)
+    textAlign(CENTER)
+    fill('ForestGreen')
+    text('Brug venstreklik, x eller z til at fjerne cirklerne.',width/2,100)
+  }
 }
 
 //interval ting
 let interval = 900
 function intervalCreator(){
-//når 15 sekunder er gået vil intervallet af createCircle forkortes 
- if(frameCount % 1200==0){ 
+//når 15 sekunder er gået vil intervallet af createCircle forkortes, du stiger i level og spillet bliver sværre
+ if(frameCount % 600==0){ 
   //fjerner oprindelige interval for at undgå overlap
   clearInterval(globalInterval)
   interval -= interval/10
   maxGrow -= maxGrow/50
   growSpeed += growSpeed/25
+  level += 1
   globalInterval = setInterval(createCircle, interval)
  }
 }
@@ -151,7 +171,31 @@ function within(cirk){
   //returner om der er overlap
   return overlap
 }
+function gameOver(){
+  //laver en masse til at dække over spillet
+  background(50)
+  cursor(ARROW)
+  textAlign(CENTER)
+  textSize(50)
+  fill('Limegreen')
+  text('You died',width/2,height/5)
+  textSize(40)
+  fill('cornflowerblue')
+  text('Level: ' + level,width/2,height/3)
+  fill('tomato')
+  text('Points: ' + point,width/2,height/2.5)
+  tryAgain = createButton('Try again')
+  tryAgain.style('color','white')
+  tryAgain.position(width/2 - tryAgain.width/2, height/2 + 100)
+  tryAgain.mousePressed(refresh)
+  //stopper draw med at køre
+  noLoop()
+}
 
+function refresh(){
+  //refresher siden da det er hurtigst
+  window.location.reload()
+}
 //tjekker om keyboard knapperne er kilkket
 function keyPressed(){
   if(key == "z" || key == "x"){
@@ -160,7 +204,19 @@ function keyPressed(){
     let theCirk = circles[i]
       if(within(theCirk)){
         circles.splice(i,1)
+        point += 1
       }
+    }
+  }
+}
+
+function mousePressed(){
+  for(i=0;i <circles.length;i++){
+    //hvis musen er over en cirkel og der trykkes vil cirklen fjernes
+  let theCirk = circles[i]
+    if(within(theCirk)){
+      circles.splice(i,1)
+      point += 1
     }
   }
 }
