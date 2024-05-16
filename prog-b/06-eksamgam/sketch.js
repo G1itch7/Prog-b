@@ -3,7 +3,7 @@ let colors
 let circles = []
 let lives = 1
 let globalInterval
-
+let boom
 /* to do list
 Lav slowdown button
 Find lyde
@@ -66,16 +66,6 @@ function draw(){
     if(circles[i].dia <0){
       circles.splice(i,1)
       lives -= 1
-    }
-
-    //hvis musen er over en cirkel og der trykkes vil cirklen fjernes
-    let theCirk = circles[i]
-    
-    if(keyPressed()){
-      if(within(theCirk)){
-        circles.splice(i,1)
-      }
-      keyPressed()
     }
   }
 
@@ -164,6 +154,12 @@ function within(cirk){
 //tjekker om keyboard knapperne er kilkket
 function keyPressed(){
   if(key == "z" || key == "x"){
-    return true
+    for(i=0;i <circles.length;i++){
+      //hvis musen er over en cirkel og der trykkes vil cirklen fjernes
+    let theCirk = circles[i]
+      if(within(theCirk)){
+        circles.splice(i,1)
+      }
+    }
   }
 }
