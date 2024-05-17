@@ -50,7 +50,7 @@ function setup(){
     }
   }
 
-  globalInterval = setInterval(createCircle, 1000)
+  globalInterval = setInterval(createCircle, interval)
 }
 
 function draw(){
@@ -102,14 +102,13 @@ function scoreBoard(){
 }
 
 //interval ting
-let interval = 900
+let interval = 1000
 function intervalCreator(){
 //når 15 sekunder er gået vil intervallet af createCircle forkortes, du stiger i level og spillet bliver sværre
  if(frameCount % 600==0){ 
   //fjerner oprindelige interval for at undgå overlap
   clearInterval(globalInterval)
   interval -= interval/10
-  maxGrow -= maxGrow/50
   growSpeed += growSpeed/25
   level += 1
   globalInterval = setInterval(createCircle, interval)
