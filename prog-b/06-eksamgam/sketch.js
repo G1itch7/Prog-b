@@ -208,7 +208,7 @@ function keyPressed(){
   if(key == "z" || key == "x"){
     for(i=0;i <circles.length;i++){
       //hvis musen er over en cirkel og der trykkes vil cirklen fjernes
-    let theCirk = circles[i]
+      let theCirk = circles[i]
       if(within(theCirk)){
         circles.splice(i,1)
         point += 1
@@ -216,33 +216,33 @@ function keyPressed(){
         sound1.load()
         //spiller min lyd
         sound1.play() 
-      } else{
-        //restarter lyd så man kan spamme den
-        sound2.load()
-        //spiller min lyd
-        sound2.play()
+        return
       }
     }
+     //Den her del bliver sat ude af loopet, siden hvis man klikker en cirkel der ikke er først i arrayet, vil den spille begge lyde på samme tid.
+     //restarter lyd så man kan spamme den
+     sound2.load()
+     //spiller min lyd
+     sound2.play()
   }
 }
 
 function mousePressed(){
   for(i=0;i <circles.length;i++){
     //hvis musen er over en cirkel og der trykkes vil cirklen fjernes
-  let theCirk = circles[i]
+    let theCirk = circles[i]
     if(within(theCirk)){
       circles.splice(i,1)
       point += 1
       //restarter lyd så man kan spamme den
-     sound1.load() 
+      sound1.load() 
       //spiller min lyd
-     sound1.play()
-    } else {
-      //restarter lyd så man kan spamme den
-      sound2.load()
-       //spiller min lyd
-      sound2.play()
-      
+      sound1.play()
     }
   }
+   //Den her del bliver sat ude af loopet, siden hvis man klikker en cirkel der ikke er først i arrayet, vil den spille begge lyde på samme tid.
+   //restarter lyd så man kan spamme den
+   sound2.load()
+   //spiller min lyd
+   sound2.play()
 }
