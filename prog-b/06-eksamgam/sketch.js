@@ -238,6 +238,7 @@ function mousePressed(){
       sound1.load() 
       //spiller min lyd
       sound1.play()
+      return
     }
   }
    //Den her del bliver sat ude af loopet, siden hvis man klikker en cirkel der ikke er først i arrayet, vil den spille begge lyde på samme tid.
