@@ -28,6 +28,7 @@ function setup(){
     c4: color("#90909090"),
     c5: color("#e0e0e0e0")
   }
+
 //Laver musen
   player = {
     //position placeholder
@@ -62,12 +63,12 @@ function draw(){
   player.y = mouseY
  
   for(let i=0; i < circles.length; i++){
-    //hvis en cirkel bliver for lille fjernes den
+    //hvis en cirkel bliver for lille fjernes den og du mister et liv
     if(circles[i].dia <0){
       circles.splice(i,1)
       lives -= 1
     }
-    //køre hver eneste cirkels funktioner
+    //kører hver eneste cirkels funktioner
     circles[i].show()
     circles[i].big() 
   }
@@ -77,12 +78,15 @@ function draw(){
 
   intervalCreator()
 
+  //viser UI'en
   scoreBoard()
 
+  //Hvis du har 0 eller under liv så dør du
   if(lives <= 0){
     gameOver()
   }
 }
+
 //Scoreboard så jeg nemmere kan lave UI'en
 function scoreBoard(){
   textSize(32)
@@ -177,9 +181,11 @@ function within(cirk){
   //returner om der er overlap
   return overlap
 }
+
 function gameOver(){
   //laver en masse til at dække over spillet
   background(50)
+  //giver dig din cursor tilbage
   cursor(ARROW)
   textAlign(CENTER)
   textSize(50)
@@ -202,7 +208,8 @@ function refresh(){
   //refresher siden da det er hurtigst
   window.location.reload()
 }
-//tjekker om keyboard knapperne er kilkket
+
+//Kører "within" funktionen når der klikkes på x eller z 
 function keyPressed(){
   if(key == "z" || key == "x"){
     for(i=0;i <circles.length;i++){
@@ -226,6 +233,7 @@ function keyPressed(){
   }
 }
 
+//det samme som over, bare med musen
 function mousePressed(){
   for(i=0;i <circles.length;i++){
     //hvis musen er over en cirkel og der trykkes vil cirklen fjernes
