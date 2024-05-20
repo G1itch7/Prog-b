@@ -8,9 +8,8 @@ let level = 1
 let tryAgain
 let sound1
 let sound2
-/* to do list
-Lav slowdown button
-*/
+let time = 0
+
 
 function preload(){
   sound1 = new Audio('assets/pop.mp3')
@@ -61,7 +60,9 @@ function draw(){
   //opdatere player cirklens position
   player.x = mouseX
   player.y = mouseY
- 
+  //viser UI'en
+  scoreBoard()
+
   for(let i=0; i < circles.length; i++){
     //hvis en cirkel bliver for lille fjernes den og du mister et liv
     if(circles[i].dia <0){
@@ -78,8 +79,7 @@ function draw(){
 
   intervalCreator()
 
-  //viser UI'en
-  scoreBoard()
+  
 
   //Hvis du har 0 eller under liv så dør du
   if(lives <= 0){
@@ -91,12 +91,15 @@ function draw(){
 function scoreBoard(){
   textSize(32)
   textAlign(LEFT)
-  fill('cornflowerblue')
-  text('Level: ' + level,20,40)
   fill('tomato')
   text('Points: ' + point,20,80)
   fill('limegreen')
-  text('Lives: ' + lives,20,120)
+  text('Lives: ' + lives,20,120) 
+  fill(100,149,237,20)
+  noStroke()
+  textAlign(CENTER)
+  textSize(500)
+  text(level,width/2,height/2+150)
   if(level == 1){
     textSize(40)
     textAlign(CENTER)
@@ -108,7 +111,7 @@ function scoreBoard(){
 //interval ting
 let interval = 1000
 function intervalCreator(){
-//når 15 sekunder er gået vil intervallet af createCircle forkortes, du stiger i level og spillet bliver sværre
+//når 10 sekunder er gået vil intervallet af createCircle forkortes, du stiger i level og spillet bliver sværre
  if(frameCount % 600==0){ 
   //fjerner oprindelige interval for at undgå overlap
   clearInterval(globalInterval)
@@ -204,6 +207,7 @@ function gameOver(){
   noLoop()
 }
 
+//brugt til tryAgain knappen
 function refresh(){
   //refresher siden da det er hurtigst
   window.location.reload()
@@ -231,6 +235,14 @@ function keyPressed(){
      //spiller min lyd
      sound2.play()
   }
+  //kill switch
+  if(keyCode == ESCAPE){
+    lives = 0
+  }
+  //fjerne alle cirkler når c bliver trykket
+  if(key == "c"){
+    cooldown()
+  }
 }
 
 //det samme som over, bare med musen
@@ -253,4 +265,22 @@ function mousePressed(){
    sound2.load()
    //spiller min lyd
    sound2.play()
+}
+
+const cooldownDuration = 10000
+function cooldown() {
+  //tager tiden nu
+  const currentTime = Date.now();
+  //Hvis forskellen imellem tiden nu og tiden sidst du trykkede er større end cooldown, virker det.
+  if (currentTime - time >= cooldownDuration) {
+    point += circles.length
+    circles = []
+    time = currentTime;
+  } else {
+    console.log("Cooldown in progress");
+  }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
