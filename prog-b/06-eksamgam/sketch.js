@@ -9,7 +9,7 @@ let tryAgain
 let sound1
 let sound2
 let time = 0
-
+let currentTime = 10000
 
 function preload(){
   sound1 = new Audio('assets/pop.mp3')
@@ -92,10 +92,10 @@ function scoreBoard(){
   textSize(32)
   textAlign(LEFT)
   fill('tomato')
-  text('Points: ' + point,20,80)
+  text('Points: ' + point,20,40)
   fill('limegreen')
-  text('Lives: ' + lives,20,120) 
-  fill(100,149,237,20)
+  text('Lives: ' + lives,20,80) 
+  fill(100,149,237,15)
   noStroke()
   textAlign(CENTER)
   textSize(500)
@@ -105,6 +105,7 @@ function scoreBoard(){
     textAlign(CENTER)
     fill('ForestGreen')
     text('Brug venstreklik, x eller z til at fjerne cirklerne.',width/2,100)
+    text('Tryk på c for at ryde skærmen',width/2,900)
   }
 }
 
@@ -185,6 +186,7 @@ function within(cirk){
   return overlap
 }
 
+//til når du dør
 function gameOver(){
   //laver en masse til at dække over spillet
   background(50)
@@ -267,15 +269,21 @@ function mousePressed(){
    sound2.play()
 }
 
+//cooldown funktion
 const cooldownDuration = 10000
 function cooldown() {
   //tager tiden nu
-  const currentTime = Date.now();
+  currentTime = Date.now();
   //Hvis forskellen imellem tiden nu og tiden sidst du trykkede er større end cooldown, virker det.
   if (currentTime - time >= cooldownDuration) {
     point += circles.length
+    //tømmer arrayet
     circles = []
+    //sætter punktet currentTime er afhængig af
     time = currentTime;
+    //tjek keyPressed
+    sound1.load()
+    sound1.play()
   } else {
     console.log("Cooldown in progress");
   }
