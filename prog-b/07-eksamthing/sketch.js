@@ -67,7 +67,7 @@ function within(cir){
     cirk.c = "#ffffff"
   } else {
     cirk.c = "#ff0000"
-    if(frameCount % 30 == 0){
+    if(frameCount % 15 == 0){
       point += 1
     }
   }
