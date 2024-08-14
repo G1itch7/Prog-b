@@ -249,7 +249,7 @@ function keyPressed(){
 
 //det samme som over, bare med musen
 function mousePressed(){
-  for(i=0;i <circles.length;i++){
+  for(i=0;i<circles.length;i++){
     //hvis musen er over en cirkel og der trykkes vil cirklen fjernes
     let theCirk = circles[i]
     if(within(theCirk)){
