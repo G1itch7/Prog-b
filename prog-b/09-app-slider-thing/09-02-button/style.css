@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.page{
+    position: fixed;
+    top: 0;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(40deg,#074173,#1679AB 70%,#5DEBD7);
+    place-items:center;
+}
+
+#button{
+    display: block;
+    height: 300px;
+    width: 300px;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background: linear-gradient(40deg,#5DEBD7,#1679AB 70%,#074173) padding-box, 
+                linear-gradient(110deg,#074173,#1679AB 70%,#5DEBD7) border-box;
+    border-radius: 50%;
+    border: 10px solid transparent;
+}
