@@ -7,6 +7,13 @@ function setup(){
 }
 
 function shiftPage(num){
+    if(num == "ArrowLeft"){
+        num = currentPage - 1
+    }
+    if(num == "ArrowRight"){
+        num = currentPage + 1
+    }
+
     if(isNaN(num)|| num <=0 || num > pages.length){
         return
     }

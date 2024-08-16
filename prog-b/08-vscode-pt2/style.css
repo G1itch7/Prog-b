@@ -10,7 +10,7 @@ img{
 }
 
 h1{
-    color:green;
+    color:rgb(18, 1, 118);
     font-family: Raleway;
 }
 
@@ -23,7 +23,7 @@ h1{
     height:100vh;
     display:grid;
     place-items:center;
-    transition: 0.3s all ease-in-out
+    transition: 0.45s all ease-in-out
 }
 
 #page1{
@@ -40,6 +40,10 @@ h1{
 
 #page4{
     background: linear-gradient(110deg,#303633,#978897 50%,#889693);
+}
+
+#page5{
+    background: linear-gradient(60deg,#fed805, #bf030a, #061161);
 }
 .visible{
     left:0;
