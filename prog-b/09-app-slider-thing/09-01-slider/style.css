@@ -7,18 +7,23 @@
 }
 html,body{
   display: grid;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   text-align: center;
   place-items: center;
   background: linear-gradient(40deg,#074173,#1679AB 70%,#5DEBD7);
+  background-image: linear-gradient(to right, #074173, #126b9d, #52d9d0);
+  overflow: hidden;
+  position: absolute;
 }
 .range{
-  height: 80px;
-  width: 380px;
+  height: 10vh;
+  width: 100vw;
   background: #fff;
   border-radius: 10px;
   padding: 0 65px 0 45px;
   box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+  rotate: -90deg;
 }
 .sliderValue{
   position: sticky;
@@ -34,9 +39,12 @@ html,body{
   line-height: 55px;
   z-index: 2;
   color: #fff;
+  transform: rotate(90deg);
   transform-origin: bottom;
   transition: transform 0.3s ease-in-out;
+  font-size: 30px;
 }
+
 .sliderValue span.show{
   transform: translateX(-50%) scale(1);
 }
@@ -64,20 +72,21 @@ html,body{
 }
 .field .value{
   position: absolute;
-  font-size: 18px;
+  font-size: 32px;
   color: #664AFF;
   font-weight: 600;
+  rotate: 90deg;
 }
 .field .value.left{
-  left: -22px;
+  left: -30px;
 }
 .field .value.right{
-  right: -43px;
+  right: -40px;
 }
 .range input{
   -webkit-appearance: none;
   width: 100%;
-  height: 3px;
+  height: 10px;
   background: #ddd;
   border-radius: 5px;
   outline: none;
@@ -106,4 +115,21 @@ html,body{
 }
 .range input::-moz-range-progress{
   background: linear-gradient(40deg,#074173,#1679AB 70%,#5DEBD7);
+  background-image: linear-gradient(to right, #074173, #126b9d, #52d9d0);
+}
+input[type="range"]::-webkit-slider-runnable-track{
+  background-image: linear-gradient(to right, #074173, #126b9d, #52d9d0); 
+  border-radius: 15px;
+  height:25px;
+}
+input[type="range"]::-webkit-slider-thumb{
+  box-sizing: border-box;
+  appearance: none;
+  position: relative;
+  background-color: #664aff;
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  top: 50%;
+  translate: 0 -50%;
 }

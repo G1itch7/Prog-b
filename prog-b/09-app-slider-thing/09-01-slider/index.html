@@ -2,21 +2,23 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>sloider lmoa</title>
+    <title>Slider MQTT Example</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
   </head>
   <body>
     <div class="range">
-        <div class="sliderValue">
-          <span>0</span>
-        </div>
-    <div class="field">
+      <div class="sliderValue">
+        <span id="sliderValue">
+          <span class="rotate">0</span>
+        </span>
+      </div>
+      <div class="field">
         <div class="value left">0</div>
-            <input type="range" min="0" max="10" value="1" steps="1">
-        <div class="value right">10</div>
-    </div>
+          <input type="range" id="slider" min="0" max="3" step="1" value="0" />
+        <div class="value right">3</div>
+      </div>
     </div>
     <script src="script.js"></script>
-
   </body>
 </html>
