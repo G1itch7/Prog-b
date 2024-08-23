@@ -3,14 +3,13 @@ let menuNumber = 1
 
 let pages //array med alle elementer med class = page 
 let menuItems //array med alle menupunkterne  
-let colors = ['red', 'green', 'blue', 'lightgreen', 'orange', 'lightcyan', 'lightgrey', 'lightblue']
 
 function setup(){
     //shift page er funktionen der tager et tal og skifter til en side
-    shiftPage(currentPage)
+   
     pages = selectAll('.page')
     menuItems = selectAll('.menuitem')
-
+    shiftPage(currentPage)
     //menuItems skal reagere ved at skifte side
     for( m of menuItems ){
         m.mousePressed( function(e) {
@@ -25,14 +24,6 @@ function setup(){
 
     //nu kan man se at pages er blevet til en liste med alle class = page ting
     console.log(pages.length)
-
-    //lav en masse div'er vi kommer ind i page3
-    for(c of colors){
-        //console.log(c)
-        let div = createDiv()
-        div.style('background-color', c)
-        select('#page3').child(div)
-    }
 }
 
 function shiftPage(num){
