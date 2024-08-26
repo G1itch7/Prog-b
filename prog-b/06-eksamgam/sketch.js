@@ -73,13 +73,12 @@ function draw(){
     circles[i].show()
     circles[i].big() 
   }
+
   //viser player
   player.show()
-  player.showInner()
-
-  intervalCreator()
-
   
+  //Laver nye intervaller
+  intervalCreator()
 
   //Hvis du har 0 eller under liv så dør du
   if(lives <= 0){
@@ -180,7 +179,7 @@ function within(cirk){
     //Player er til højre for cirkel
     mouseLeft > cRight
   ){
-     overlap = false 
+  overlap = false 
   }
   //returner om der er overlap
   return overlap
@@ -215,7 +214,7 @@ function refresh(){
   window.location.reload()
 }
 
-//Kører "within" funktionen når der klikkes på x eller z 
+//Kører "within" funktionen når der klikkes på x eller z og clear med c
 function keyPressed(){
   if(key == "z" || key == "x"){
     for(i=0;i <circles.length;i++){
@@ -249,7 +248,7 @@ function keyPressed(){
 
 //det samme som over, bare med musen
 function mousePressed(){
-  for(i=0;i<circles.length;i++){
+  for(i=0;i <circles.length;i++){
     //hvis musen er over en cirkel og der trykkes vil cirklen fjernes
     let theCirk = circles[i]
     if(within(theCirk)){
@@ -275,7 +274,7 @@ function cooldown() {
   //tager tiden nu
   currentTime = Date.now();
   //Hvis forskellen imellem tiden nu og tiden sidst du trykkede er større end cooldown, virker det.
-  if (currentTime - time >= cooldownDuration) {
+  if(currentTime - time >= cooldownDuration) {
     point += circles.length
     //tømmer arrayet
     circles = []
@@ -284,8 +283,6 @@ function cooldown() {
     //tjek keyPressed
     sound1.load()
     sound1.play()
-  } else {
-    console.log("Cooldown in progress");
   }
 }
 
