@@ -22,7 +22,7 @@ header.hidden:hover{
 }
 
 header#leftmenu{
-    background-image:linear-gradient(#ff2f3f,#ef2e2e,#ee1245);
+    background:linear-gradient(#ff2f3f,#ef2e2e,#ee1245);
     width: 15vh;
     height: 100vh;
     grid-template-columns: auto;
@@ -64,7 +64,8 @@ header.hidden:hover .menuitem{
     overflow:hidden;
     display:grid;
     place-items:center;
-    transition: 0.3s 0.3s all ease-in-out;
+    transition: 0.3s 0.5s all ease-in-out;
+    backdrop-filter: blur(4px);
 }
 
 .visible{
@@ -73,12 +74,15 @@ header.hidden:hover .menuitem{
 }
 
 #page1{
-    background-color: lightskyblue;
+    background-image: url("https://rose-engine.org/signalis/images/website_header_20_fullwidth.png");
     grid-template-columns: 1fr 3fr;
+    background-position: center;
+    background-size: cover;
 }
 
 #page1 .left{
-    background-color: whitesmoke;
+    background-color: #00000005;
+    backdrop-filter: blur(4px);
     width: 100%;
     height: 100%;
     display: grid;
