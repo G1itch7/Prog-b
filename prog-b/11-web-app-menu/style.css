@@ -5,28 +5,20 @@
 }
 
 header{
-    width:100vw;
+    width:40vw;
     height:12vh;
     position:fixed;
     z-index:2;
-    background-color:lightgray;
     display:grid;
     grid-template-columns: repeat(4, 1fr);
     transition: all .3s ease-in-out;
+    top:88vh;
 }
 header.hidden{
     height: 2vh;
 }
 header.hidden:hover{
     height: 12vh;
-}
-
-header#leftmenu{
-    background:linear-gradient(#ff2f3f,#ef2e2e,#ee1245);
-    width: 15vh;
-    height: 100vh;
-    grid-template-columns: auto;
-    grid-template-rows: repeat(4,10rem) ;
 }
 
 .menuitem{
@@ -42,6 +34,7 @@ header#leftmenu{
 
 header.hidden .menuitem{
     font-size: 0;
+    color: #8C2501;
 }
 header.hidden:hover .menuitem{
     font-size: 2rem;
@@ -53,7 +46,7 @@ header.hidden:hover .menuitem{
 }
 
 .menuitem.active{
-    border-bottom:6px solid lime;
+    border-bottom:6px solid #8C2501;
 }
 
 .page{
