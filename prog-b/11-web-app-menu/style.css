@@ -27,7 +27,6 @@ header.hidden:hover{
     font-size:2rem;
     display:grid;
     place-items:center;
-    border-right:1px solid black;
     cursor: pointer;
     transition: 0.3s all ease-in-out;
 }
