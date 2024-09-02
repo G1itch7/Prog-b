@@ -195,5 +195,16 @@ header.hidden:hover .menuitem{
 #page4{
     background-image: url("/prog-b/11-web-app-menu/images/wp11647684-signalis-wallpapers.png");
     background-size: cover;
+    grid-template-rows: 2fr 6fr 2fr;
+}
+
+#page4 .top{
+    background-color: #00000005;
+    backdrop-filter: blur(4px);
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
 }
 
