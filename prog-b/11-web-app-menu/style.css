@@ -29,6 +29,7 @@ header.hidden:hover{
     place-items:center;
     cursor: pointer;
     transition: 0.3s all ease-in-out;
+    color: #8C2501;
 }
 
 header.hidden .menuitem{
@@ -56,13 +57,14 @@ header.hidden:hover .menuitem{
     overflow:hidden;
     display:grid;
     place-items:center;
-    transition: 0.3s 0.5s all ease-in-out;
-    backdrop-filter: blur(4px);
+    transition: 0.2s 0.3s all ease-in-out;
+    backdrop-filter: blur(40px);
 }
 
 .visible{
     left:0;
     transition: 0.3s all ease-in-out;
+    
 }
 
 #page1{
@@ -79,13 +81,16 @@ header.hidden:hover .menuitem{
     height: 100%;
     display: grid;
     place-items: center;
+    padding: 2rem;
 }
 
 #page2{
-    background-color: lightgreen;
+    background-image: url("/prog-b/11-web-app-menu/images/8480_p3_1724020311715.jpeg");
+    background-position: center;
+    background-size: cover;
 }
 #page3{
-    background-color: lightcyan;
+    background-color: Black;
 }
 
 #page4{
@@ -95,4 +100,8 @@ header.hidden:hover .menuitem{
 h1{
     font-family: Raleway;
     color:hotpink;
+}
+
+p{
+    color:white;
 }
