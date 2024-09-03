@@ -72,7 +72,6 @@ header.hidden:hover .menuitem{
     display:grid;
     place-items:center;
     transition: 0.2s 0.3s all ease-in-out;
-    backdrop-filter: blur(40px);
 }
 
 .visible{
@@ -99,7 +98,7 @@ header.hidden:hover .menuitem{
 }
 
 #page2{
-    background-image: url("/prog-b/11-web-app-menu/images/8480_p3_1724020311715.jpeg");
+    background-image: url("https://cdn.discordapp.com/attachments/1184378611986346056/1274852974086328443/8480_p3.jpg?ex=66d7895a&is=66d637da&hm=73dcf78f366e95a7246d115210d82d79e297729e3bd0974cae1665653316d3d5&");
     background-position: center;
     background-size: cover;
     grid-template-columns: 1fr 4fr 1fr;
@@ -193,7 +192,7 @@ header.hidden:hover .menuitem{
 
 
 #page4{
-    background-image: url("/prog-b/11-web-app-menu/images/wp11647684-signalis-wallpapers.png");
+    background-image: url("https://wallpapercave.com/wp/wp11647684.png");
     background-size: cover;
     grid-template-rows: 2fr 6fr 2fr;
 }
