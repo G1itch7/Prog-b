@@ -122,10 +122,10 @@ header.hidden:hover .menuitem{
     width: 100%;
     height: 30%;
     display: grid;
-    place-items: top left;
-    padding: 5rem; 
+    place-items: center;
+    padding: 2rem; 
     color:white;
-    text-align: center;
+    text-align: Top;
 }
 
 #page2 .right{
