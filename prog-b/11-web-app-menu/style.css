@@ -164,7 +164,7 @@ header.hidden:hover .menuitem{
 #page3 .right{
     height: 80%;
     width:100%;
-    padding:5rem;
+    padding: 5rem;
     grid-template-columns: 1fr 1fr;
     display:grid;
     row-gap: 1rem;
@@ -175,26 +175,56 @@ header.hidden:hover .menuitem{
     background-image: url("http://rose-engine.org/signalis/images/screens/2.png");
     background-size: cover;
     border: 0.5px solid #8C2501;
+    transition: 0.3s ease-in-out;
 }
 
 #image2{
     background-image: url("http://rose-engine.org/signalis/images/screens/9.png");
     background-size: cover;
     border: 0.5px solid #8C2501;
+    transition: 0.3s ease-in-out;
 }
 
 #image3{
     background-image: url("http://rose-engine.org/signalis/images/screens/8.png");
     background-size: cover;
     border: 0.5px solid #8C2501;
+    transition: 0.3s ease-in-out;
 }
 
 #image4{
     background-image: url("http://rose-engine.org/signalis/images/screens/6.png");
     background-size: cover;
     border: 0.5px solid #8C2501;
+    transition: 0.3s ease-in-out;
 }
 
+
+.image{
+    padding: 1.5rem;
+}
+
+.image:hover{
+    transform: scale(110%,110%);
+    z-index: 2222;
+}
+
+#image1:hover .hiddenText{
+    visibility: visible;
+}
+#image2:hover .hiddenText{
+    visibility: visible;
+}
+#image3:hover .hiddenText{
+    visibility: visible;
+}
+#image4:hover .hiddenText{
+    visibility: visible;
+}
+
+.hiddenText{
+    visibility: hidden;
+}
 
 #page4{
     background-image: url("https://wallpapercave.com/wp/wp11647684.png");
