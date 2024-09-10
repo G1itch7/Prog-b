@@ -1,0 +1,12 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+#page{
+    height: 100vh;
+    width: 100vw;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
