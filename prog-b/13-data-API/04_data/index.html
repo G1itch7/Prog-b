@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P5 web template</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js" integrity="sha512-lvddmeF7aHRJwdbJeYThWd5kWSjTrXBzCRF/jYROiHzmhMJ1dEXfGH5Q7ft0yhizXTopAETG03s5ajTflauijA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <header>
+        <div class="menuitem" id="menu1">Data</div>
+        <div class="menuitem" id="menu2">Lokale data</div>
+        <div class="menuitem" id="menu3">Side 3</div>
+        <div class="menuitem" id="menu4">Side 4</div>
+    </header>
+
+    <div class="page" id="page1">
+        <div class="left">
+            <div class="'container">
+                <h1>Data</h1>
+                <p>Den her side giver forskellige eksempler på hvordan man henter data. </p>    
+                <p>Klik i menuen for at se de forskellige eksempler </p>    
+            </div>
+        </div>        
+        <div class="right"></div>
+    </div>
+    <div class="page" id="page2">
+        <div class="left">
+            <div>
+                <h1>Lokal JSON fil</h1>
+                <p>Til højre kan du se hvordan vi har hentet data i filen mydata.json</p>    
+                <p>Kig i den funktion der hedder pageTwo() for at se hvordan data til højre er kommet frem</p>
+            </div>
+        </div>
+        <div class="right" id="localData"></div>
+    </div>
+    <div class="page" id="page3">
+        <div class="left">
+            <h1>Side 3</h1>
+        </div>
+        <div class="right"></div>
+    </div>
+    <div class="page" id="page4">
+        <div class="left">
+            <h1>Side 4</h1>
+        </div>
+        <div class="right"></div>
+    </div>
+</body>
+</html>
