@@ -1,0 +1,90 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    /* Nulstiller margin og padding på alle elementer og sætter box-sizing til border-box for bedre kontrol over elementernes størrelse */
+}
+
+header{
+    width:100vw;
+    height:20vh;
+    background-color:black;
+    color:white;
+    display:grid;
+    place-items: center;
+    /* Gør headeren til en grid container og centrerer indholdet både vandret og lodret */
+}
+
+.page{
+    position:fixed;
+    height: 80vh;
+    width:100vw;
+    top:20vh;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    /* Gør .page til en grid container med to kolonner, hver tager en lige stor del af bredden (1fr) */
+}
+
+.left, .right{
+    width:100%;
+    height:100%;
+    padding:10rem;
+    /* Sætter bredde og højde til at fylde hele forælderen og tilføjer indvendig afstand (padding) */
+}
+
+.left{
+    background-color:whitesmoke;
+    /* Sætter baggrundsfarven på venstre kolonne */
+}
+
+.right{
+    display:grid;
+    width:100%;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap:2rem;
+    overflow:scroll;
+    /* Gør .right til en grid container med et dynamisk antal kolonner:
+       - 'repeat(auto-fill, minmax(20rem, 1fr))' opretter så mange kolonner som muligt, der mindst er 20rem brede, men kan vokse til at fylde det tilgængelige rum.
+       - 'gap:2rem' tilføjer afstand mellem grid items (indlæggene).
+       - 'overflow:scroll' tillader scroll, hvis indholdet overstiger beholderens højde. */
+}
+
+.post{
+    width:100%;
+    height:20rem;
+    border:1px solid gray;
+    border-radius:1rem;
+    padding:1rem;
+    display:grid;
+    place-items:center;
+    background-size: cover;
+    position:relative;
+    overflow:scroll;
+    /* Gør hvert indlæg til en grid container:
+       - 'display:grid' og 'place-items:center' centrerer indholdet i indlægget.
+       - 'position:relative' gør det muligt at positionere indre elementer absolut i forhold til .post. */
+}
+
+.post h1{
+    color:gray;
+    font-size:1.5rem;
+    font-weight:bold;
+    /* Styling af overskriften i hvert indlæg */
+}
+
+.post .author{
+    position:absolute;
+    right:1rem;
+    top:1rem;
+    color:dodgerblue;
+    width:80%;
+    padding-right:.8rem;
+    background-color:black;
+    display:grid;
+    text-align: right;
+    border-radius:1rem;
+    /* Positionerer forfatterens navn øverst til højre i indlægget:
+       - 'position:absolute' placerer elementet i forhold til .post.
+       - 'display:grid' bruges her til nemt at centrere eller justere indholdet inden i forfatterfeltet. */
+}
