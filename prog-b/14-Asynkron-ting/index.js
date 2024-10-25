@@ -17,29 +17,34 @@ async function hentTopPosts(subreddit) {
 
     //tøm right html for at gøre plads
     select('#page1 .right').html('')
-
-    //først sætter vi et repsonse objekt lig metoden fetch som henter data 
-    //det tager noget tid, derfor keywordet "await"
-    const response = await fetch(`https://www.reddit.com/r/${subreddit}/top.json?limit=8`)
-        //når vi så får det objekt tilbage, og HVIS repsonse.ok = true
-        //så kan vi bruge metoden .json() til at læse en readable stream 
-        //den operation tager OGSÅ noget tid - derfor keywordet "await" IGEN 
-        const json = await response.json()
-            //og SÅ kan vi bruge data fra serveren i json format
-            console.log(json.data.children)
-            //posts er et array med poster fra json objektet 
-            let posts = json.data.children
-            //vi løber arrayet med poster igennem 
-            for( p of posts ){
-                //og nu kan vi logge forskellige egenskaber ved hver post til konsollen 
-                console.log(p.data.title)
-                console.log(p.data.url)
-                console.log(p.data.ups)
-                console.log(p.data.thumbnail)
-                console.log(p.data.author)
-                createPost(p.data)
+    try{
+        //først sætter vi et repsonse objekt lig metoden fetch som henter data 
+        //det tager noget tid, derfor keywordet "await"
+        const response = await fetch(`https://www.reddit.com/r/${subreddit}/top.json?limit=8`)
+            //når vi så får det objekt tilbage, og HVIS repsonse.ok = true
+            //så kan vi bruge metoden .json() til at læse en readable stream 
+            //den operation tager OGSÅ noget tid - derfor keywordet "await" IGEN 
+            const json = await response.json()
+                //og SÅ kan vi bruge data fra serveren i json format
+                console.log(json.data.children)
+                //posts er et array med poster fra json objektet 
+                let posts = json.data.children
+                //vi løber arrayet med poster igennem 
+                for( p of posts ){
+                    //og nu kan vi logge forskellige egenskaber ved hver post til konsollen 
+                    console.log(p.data.title)
+                    console.log(p.data.url)
+                    console.log(p.data.ups)
+                    console.log(p.data.thumbnail)
+                    console.log(p.data.author)
+                    createPost(p.data)
+                }
+            } catch(e) {
+                console.log(e)
+                createElement('p', "shi bro")
+                
             }
-        }
+         }
         
         
 function createPost(post){
