@@ -5,6 +5,9 @@ let m5NameDiv, m5StatusDiv
 //denne variabel bruges til at håndtere mqtt
 let client 
 
+let state
+
+
 function setup() {
   //tag fat i de to HTML elementer vi vil modificere 
   m5NameDiv = select('#m5_1 header')
@@ -19,7 +22,7 @@ function setup() {
   })
 
   //nu vil vi gerne subscribe på et emne
-  client.subscribe('programmering') 
+  client.subscribe('state_machine') 
 
   //og så skal vi sætte den LISTENER op som skal modtage input fra MQTT
   client.on('message', function(emne, besked){
@@ -32,8 +35,18 @@ function setup() {
     //nu kan jeg bruge data fra JSON objektet 
     console.log(json.name, 'her er navnet fra JSON objektet')
     //SÅ kan vi opdatere HTML dokumentet 
-    m5NameDiv.html(json.name)
-    m5StatusDiv.html(json.status)
-  
+    m5NameDiv.html(json.id)
+    m5StatusDiv.html(json.state)
+    state = json.state
   })
+}
+
+function draw(){
+  clear()
+  if(state == "setup"){
+    fill('orange')
+    noStroke()
+    ellipse(100,100,50)
+    text("setup - waiting for something",100,50)
+  }
 }
