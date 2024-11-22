@@ -19,6 +19,14 @@
             <h1>Tid</h1>
         </div>
         <div id="clock"></div>
+        
+        <div>   
+            <div>Set timer to:</div>
+            <input type="number" name="hours" id="hours" max="24" min="0" value="0">
+            <input type="number" name="minutes" id="minutes" max="59" min="0" value="0">
+            <input type="number" name="seconds" id="seconds" max="59" min="0" value="0">
+            <input type="submit" value="set/stop" onclick="timer()">
+        </div>
     </div>
     <div class="page" id="page2">
         <h1>Side 2</h1>

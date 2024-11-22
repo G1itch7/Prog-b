@@ -1,13 +1,11 @@
-console.log("clock is here")
-
 class Clock{
     //constructor er klassens "setup" funktion, som kaldes når vi opretter nye objekter med klassen
-    //kaldes polymorfi
+    //kaldes polymorfi når den skifte form baseret på argumenterne, eller bare generelt
     constructor(div, style){
         this.div = div
         this.style = style
         //divs for hours, minutes and seconds 
-        this.hDiv = createDiv()
+        this.hDiv = createDiv()     
         this.mDiv = createDiv()
         this.sDiv = createDiv()
         this.div.child(this.hDiv)
