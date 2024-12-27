@@ -20,16 +20,15 @@ class Advice {
             function(data){
                 console.log(data.slip.advice)
                 //laver div til advice data
-                    let slipDiv = createDiv('Slip: '+ data.slip.id)
-                    let adviceDiv = createDiv(data.slip.advice)
-                    
+                    let newDiv = createDiv()
+                    let slipDiv = createElement('h3', 'Slip: '+ data.slip.id)
+                    let adviceDiv = createElement('h2', data.slip.advice)
+                    //sætter advice id og advice ind i et div
+                    newDiv.child(slipDiv)
+                    newDiv.child(adviceDiv)
+                    //sætter det newDiv ind i container div'en
+                    select('#container').child(newDiv)
             }
         )
-        //laver en div til at separere hvert advice
-        this.newDiv = createDiv('')
-        this.containerDiv.child(this.newDiv)
-        this.newDiv.child(this.slipDiv)
-        this.newDiv.child(this.adviceDiv)
-        
     }
 }
