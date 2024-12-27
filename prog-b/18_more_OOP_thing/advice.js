@@ -26,9 +26,10 @@ class Advice {
             }
         )
         //laver en div til at separere hvert advice
-        this.newDiv = createDiv()
+        this.newDiv = createDiv('')
+        this.containerDiv.child(this.newDiv)
         this.newDiv.child(this.slipDiv)
         this.newDiv.child(this.adviceDiv)
-        this.containerDiv.child(this.newDiv)
+        
     }
 }
