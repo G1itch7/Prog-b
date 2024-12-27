@@ -21,11 +21,12 @@ class Advice {
                 console.log(data.slip.advice)
                 //laver div til advice data
                     let newDiv = createDiv()
-                    let slipDiv = createElement('h3', 'Slip: '+ data.slip.id)
-                    let adviceDiv = createElement('h2', data.slip.advice)
+                    let slipDiv = createElement('p', 'Slip: '+ data.slip.id)
+                    let adviceDiv = createElement('h4', data.slip.advice)
                     //sætter advice id og advice ind i et div
                     newDiv.child(slipDiv)
                     newDiv.child(adviceDiv)
+                    newDiv.class('advice')
                     //sætter det newDiv ind i container div'en
                     select('#container').child(newDiv)
             }
