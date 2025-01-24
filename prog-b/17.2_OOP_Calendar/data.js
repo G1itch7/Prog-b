@@ -6,13 +6,14 @@ let dataStructure = [
     },
     {
       day:"2",
-      content:"./assets/jul.jpg",
-      "type":"image"
+      content:"https://www.youtube.com/embed/ZFt83Q3GOok",
+      "type":"video"
+
     },
     {
       day:"3",
       content:"./assets/jul.jpg",
-      "type":"video"
+      "type":"image"
     },
     {
       day:"4",

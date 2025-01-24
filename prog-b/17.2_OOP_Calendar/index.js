@@ -2,7 +2,10 @@ let classContainer
 let doorSound
 
 function preload() {
-  doorSound = loadSound('./assets/doorSound.mp3')
+  for( door of dataStructure)
+    if(door.sound){
+      door.sound = loadSound('./assets/doorSound.mp3')
+    }
 }
 
 function setup() {
@@ -12,8 +15,6 @@ function setup() {
   //let door = new Door(calendarContainer, "12", './assets/jul.jpg', doorSound)
 
   for( door of dataStructure ){
-    new Door(calendarContainer, door.day, door.content, doorSound)
+    Doorfactory.createDoor(calendarContainer, door)
   }
-
-  let test = new VideoDoor
 }

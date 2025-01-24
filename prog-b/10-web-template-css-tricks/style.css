@@ -16,7 +16,7 @@ header{
 
 header#leftmenu{
     background-image:linear-gradient(#ff2f3f,#ef2e2e,#ee1245);
-    width: 15vh;
+    width: 7vw;
     height: 100vh;
     grid-template-columns: auto;
     grid-template-rows: repeat(4,10rem) ;
@@ -78,3 +78,4 @@ h1{
     font-family: Raleway;
     color:hotpink;
 }
+
