@@ -1,0 +1,52 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.page{
+    position:fixed;
+    top:0;
+    left:-100vw;
+    width:100vw;
+    height: 100vh;
+    overflow:hidden;
+    display:grid;
+    place-items:center;
+    transition: 0.3s 0.3s all ease-in-out;
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:2;
+}
+button {
+    z-index:3;
+    border-radius:50%;
+}
+
+.visible{
+    left:0;
+    transition: 0.3s all ease-in-out;
+}
+
+#page1{
+    background-color: lightskyblue;
+}
+
+#page2{
+    background-color: lightgreen;
+}
+#page3{
+    background-color: lightcyan;
+}
+#page4{
+    background-color: lightseagreen;
+}
+
+h1{
+    font-family: Raleway;
+    color:hotpink;
+}
