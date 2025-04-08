@@ -15,20 +15,19 @@ function setup() {
 
 function mousePressed(){
   console.log('mouse pressed')
-  doDaThing()
+  doDaThing("ahar",23,52,123,0.6,0.2)
 }
 
-let name = "chees"
-let r =22
-let g = 23
-let b = 24
-let speed = 0.1
-let rotate = "fast" 
+
 
 function doDaThing(name, r, g, b, speed, rotate){
   let cheese = {
-    "x": 2,
-    "y": 1,
+    "name": name,
+    "r": r,
+    "g": g,
+    "b": b,
+    "speed": speed,
+    "rotate": rotate
   }
   dataModel.preset.push(cheese)
   database.collection('reload').doc('presets').set(dataModel)
