@@ -1,8 +1,7 @@
-// Your web app's Firebase configuration
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
 
-const firebaseConfig = {
-
-    apiKey: "AIzaSyCqnXBtQymHZo5B8-1IzF4HgT00C0_cWxk",
+    apiKey: theKey,
   
     authDomain: "mental-reload-95d66.firebaseapp.com",
   
@@ -15,9 +14,7 @@ const firebaseConfig = {
     appId: "1:634955541388:web:64a9e7fc037ead46f1c4a9"
   
   };
-  
-  
+
   // Initialize Firebase
-  
-  const app = initializeApp(firebaseConfig);
+  const app = firebase.initializeApp(firebaseConfig);
   const database = firebase.firestore()
