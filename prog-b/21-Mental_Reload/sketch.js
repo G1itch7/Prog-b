@@ -1,6 +1,8 @@
 //VIEW MODEL CONTROLLER 
 let dataModel
 let client 
+let savedPresets = []
+
 
 function setup() {
   noCanvas()
@@ -9,7 +11,7 @@ function setup() {
     .onSnapshot( (doc) => {
     console.log('Fik dette fra databasen: ', doc.data() )
     dataModel = doc.data()
-    
+    getSavedPresets()
     })
   //Loading mqtt  
     //vi kan bruge mqtt.connect fordi vi har inkluderet mqtt.js i HTML filen
@@ -37,11 +39,13 @@ function setup() {
     
 }
 
+//for testing
 function mousePressed(){
-  console.log('mouse pressed')
-  doDaThing("ahar",23,52,123,0.6,0.2)
+  sendToMotor(500,10,1,256)
+  savePreset('test', 255, 0, 0, 10, 1)
 }
 
+//sends instructions to the motor via mqtt
 function sendToMotor(steps,speed,dir,microstep){
   let message = {
     "Steps": steps,
@@ -49,12 +53,13 @@ function sendToMotor(steps,speed,dir,microstep){
     "Dir": dir,
     "MicroSteps": microstep
   }
-  client.publish('ESPStepper1/Motor', message) 
+  client.publish('ESPStepper1/Motor', JSON.stringify(message)) 
+  console.log("sent to motor")
 }
 
-
-
-function doDaThing(name, r, g, b, speed, rotate){
+//A function that sends presets with rgb values of accent lighting and speed + rotation direction 
+//of the motors to the firebase database.
+function savePreset(name, r, g, b, speed, rotate){
   let cheese = {
     "name": name,
     "r": r,
@@ -71,4 +76,15 @@ function doDaThing(name, r, g, b, speed, rotate){
   .catch( (error) => {
     console.log('det gik mindre godt', error)
   })
+  getSavedPresets()
+}
+
+//A function that takes the presets from the database and puts them in an array alphabetically.
+function getSavedPresets(){
+  savedPresets = []
+  for (let i = 0; i < dataModel.preset.length; i++){
+    savedPresets.push(dataModel.preset[i])
+  }
+  savedPresets.sort((a, b) => (a.name > b.name ? 1 : -1))
+  console.log("Her er presets fra databasen der er lagt i et array",savedPresets)
 }
