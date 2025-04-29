@@ -43,10 +43,19 @@ function setup() {
 function mousePressed(){
   sendToMotor(500,10,1,256)
   savePreset('test', 255, 0, 0, 10, 1)
+  sendToLED(255, 0, 0, 10, 1, 0)
 }
 
 //sends instructions to the motor via mqtt
 function sendToMotor(steps,speed,dir,microstep){
+  if(speed > 10 || speed < 0){
+    console.log('speed is too high')
+    return
+  }
+  if(dir != 1 && dir != 0){
+    console.log('direction is not 1 or 0')
+    return
+  }
   let message = {
     "Steps": steps,
     "Speed": speed,
@@ -57,14 +66,34 @@ function sendToMotor(steps,speed,dir,microstep){
   console.log("sent to motor")
 }
 
-//A function that sends presets with rgb values of accent lighting and speed + rotation direction 
+function sendToLED(r, g, b, ra, ga, ba){
+  if(r > 255 || g > 255 || b > 255 || ra > 255 || ga > 255 || ba > 255){
+    console.log('one RGB value is too high')
+    return
+  }
+  let message = {
+    "r": r,
+    "g": g,
+    "b": b,
+    "ra": ra,
+    "ga": ga,
+    "ba": ba
+  }
+  client.publish('LED', JSON.stringify(message)) 
+  console.log("sent to LED")
+}
+
+//A function that sends presets with rgb values of accent lighting and the main lightand speed + rotation direction 
 //of the motors to the firebase database.
-function savePreset(name, r, g, b, speed, rotate){
+function savePreset(name, r, g, b, ra, ga, ba, speed, rotate){
   let cheese = {
     "name": name,
     "r": r,
     "g": g,
     "b": b,
+    "ra": ra,
+    "ga": ga,
+    "ba": ba,
     "speed": speed,
     "rotate": rotate
   }
