@@ -1,7 +1,12 @@
-//VIEW MODEL CONTROLLER 
 let dataModel
 let client 
 let savedPresets = []
+
+// Phillips Hue
+var ip = '10.78.65.185' // the hub IP address
+var username = 'pAEzbkQouu3gf1UwgpNFM4TGBmU038Hd3vXCF2Vy'       // fill in your Hub-given username here
+let myLight = 1
+let url = 'http://' + ip + '/api/' + username + '/lights/' + myLight 
 
 
 function setup() {
@@ -14,29 +19,14 @@ function setup() {
     getSavedPresets()
     })
   //Loading mqtt  
-    //vi kan bruge mqtt.connect fordi vi har inkluderet mqtt.js i HTML filen
+    //Forbinder til broker
     client = mqtt.connect('mqtt://mqtt-plain.nextservices.dk:9001')
   
-    //on er en asynkron EVENT, som kaldes når vi får en besked fra mqtt serveren 
+    //on er en asynkron event listener som venter på besked om forbindelsen
     client.on('connect', function(svar){
       console.log(svar, 'serveren er klar til mqtt kommunikation')
     })
 
-    //nu vil vi gerne subscribe på et emne
-    client.subscribe('ESPStepper1/Motor') 
-  
-    //og så skal vi sætte den LISTENER op som skal modtage input fra MQTT
-    client.on('message', function(emne, besked){
-      //emnet kommer som en string 
-      console.log(emne)
-      //beskeden skal vi lige parse før vi kan læse den
-      console.log(besked.toString())
-      //det vi får fra m5'eren er i det her eksempel JSON format 
-      let json = JSON.parse(besked.toString())
-      //nu kan jeg bruge data fra JSON objektet 
-      console.log(json.name, 'her er navnet fra JSON objektet')
-    })
-    
 }
 
 //for testing
