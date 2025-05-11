@@ -2,13 +2,6 @@ let dataModel
 let client 
 let savedPresets = []
 
-// Phillips Hue
-var ip = '10.78.65.185' // the hub IP address
-var username = 'pAEzbkQouu3gf1UwgpNFM4TGBmU038Hd3vXCF2Vy'       // fill in your Hub-given username here
-let myLight = 1
-let url = 'http://' + ip + '/api/' + username + '/lights/' + myLight 
-
-
 function setup() {
   noCanvas()
   //loading firebase
@@ -44,6 +37,10 @@ function sendToMotor(steps,speed,dir,microstep){
   }
   if(dir != 1 && dir != 0){
     console.log('direction is not 1 or 0')
+    return
+  }
+  if(microstep < 0 || microstep > 256){
+    console.log("microstep can't be less than 0 or more than 256")
     return
   }
   let message = {
