@@ -130,6 +130,10 @@ function sendToMotor(steps,speed,dir,microstep){
     console.log('direction is not 1 or 0')
     return
   }
+  if(microstep < 0 || microstep > 256){
+    console.log("microstep can't be less than 0 or more than 256")
+    return
+  }
   let message = {
     "Steps": steps,
     "Speed": speed,
