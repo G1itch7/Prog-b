@@ -2,13 +2,6 @@ let dataModel
 let client 
 let savedPresets = []
 
-// Phillips Hue
-var ip = '10.78.65.185' // the hub IP address
-var username = 'pAEzbkQouu3gf1UwgpNFM4TGBmU038Hd3vXCF2Vy'       // fill in your Hub-given username here
-let myLight = 1
-let url = 'http://' + ip + '/api/' + username + '/lights/' + myLight 
-
-
 function setup() {
   noCanvas()
   //loading firebase
@@ -19,15 +12,106 @@ function setup() {
     getSavedPresets()
     })
   //Loading mqtt  
-    //Forbinder til broker
-    client = mqtt.connect('mqtt://mqtt-plain.nextservices.dk:9001')
-  
-    //on er en asynkron event listener som venter på besked om forbindelsen
-    client.on('connect', function(svar){
-      console.log(svar, 'serveren er klar til mqtt kommunikation')
-    })
+  //Forbinder til broker
+  client = mqtt.connect('mqtt://mqtt-plain.nextservices.dk:9001')
 
+  //on er en asynkron event listener som venter på besked om forbindelsen
+  client.on('connect', function(svar){
+    console.log(svar, 'serveren er klar til mqtt kommunikation')
+  })
+
+  client.subscribe('ControlPanel2/Response')
+  
+  client.on('message', function(topic, message){
+    let rawMessage = message.toString();
+
+    // Ensure the message starts and ends with curly braces, as valid JSON must be enclosed in them
+    if (!rawMessage.startsWith('{') || !rawMessage.endsWith('}')) {
+        throw new Error('Invalid message format');
+    }
+
+    // Replace unquoted property names with quoted ones
+    // https://stackoverflow.com/questions/44562635/regular-expression-add-double-quotes-around-values-and-keys-in-javascript
+    rawMessage = rawMessage.replace(/([a-zA-Z0-9]+):/g, '"$1":'); // Quote property names
+    rawMessage = rawMessage.replace(/: ([a-zA-Z0-9/]+)/g, ': "$1"'); // Quote string values
+
+    // Parse the fixed JSON string into a JavaScript object
+    const response = JSON.parse(rawMessage);
+    console.log('Received response from Pairing/Client:', response);
+    handleInterface(response)
+  })
 }
+
+//knob, toggle, button
+
+function handleInterface(r){
+  if(r.ComponentType == 'knob'){
+    handleKnob(r)
+  } else if (r.ComponentType == 'toggle'){
+    handleToggle(r)
+  } else if (r.ComponentType == 'button'){
+    handleButton()
+  }
+} 
+
+function handleKnob(r){
+  if(r.ID == 1){
+    if(r.Direction == 1){
+      animateParams.lightIntensity += 1
+    } else {
+      animateParams.lightIntensity -= 1
+    }
+  }
+  if(r.ID == 2){
+    if(r.Direction == 1){
+      animateParams.earthRotationSpeed += 1
+    } else {
+      animateParams.earthRotationSpeed -= 1
+    }
+  }
+  if(r.ID == 3){
+    if(r.Direction == 1){
+      song.num += 1
+    } else {
+      song.num -= 1
+    }
+  }
+  if(r.ID == 4){
+    if(r.Direction == 1){
+      color += 1
+    } else {
+      color -= 1
+    }
+  }
+  if(r.ID == 5){
+    if(r.Direction == 1){
+      LightIntensity2 += 1
+    } else {
+      LightIntensity1 -= 1
+    }
+  }
+}
+
+function handleToggle(r){
+  if(r.ID == 1){
+    if(rotationDirection == 1){
+      rotationDirection = 0
+      return
+    }
+    rotationDirection = 1
+  }
+  if(r.ID == 2){
+    if(on == 1){
+      on = 0
+      return
+    }
+    on = 1
+  }
+}
+function handleButton(){
+  savePreset()
+}
+
 
 //for testing
 function mousePressed(){
@@ -84,7 +168,7 @@ function savePreset(name, r, g, b, ra, ga, ba, speed, rotate){
     "speed": speed,
     "rotate": rotate
   }
-  dataModel.preset.push(cheese)
+  dataModel.presets.push(cheese)
   database.collection('reload').doc('presets').set(dataModel)
   .then( ()=>{
     console.log('database updated', cheese)
@@ -98,8 +182,8 @@ function savePreset(name, r, g, b, ra, ga, ba, speed, rotate){
 //A function that takes the presets from the database and puts them in an array alphabetically.
 function getSavedPresets(){
   savedPresets = []
-  for (let i = 0; i < dataModel.preset.length; i++){
-    savedPresets.push(dataModel.preset[i])
+  for (let i = 0; i < dataModel.presets.length; i++){
+    savedPresets.push(dataModel.presets[i])
   }
   savedPresets.sort((a, b) => (a.name > b.name ? 1 : -1))
   console.log("Her er presets fra databasen der er lagt i et array",savedPresets)
